@@ -5,7 +5,7 @@ import User from '../models/userModel.js';
 
 export const signupUser = async (req, res) => {
   const { username, email, password } = req.body;
-
+  console.log("Login request received for:", email);
   if (!username || !email || !password) {
     return res.status(400).json({ message: 'Please provide all fields' });
   }
@@ -81,7 +81,14 @@ export const loginUser = async (req, res) => {
     //       username: user.name, 
     //     },
     //   });
-    res.status(200).json({ message: 'Login successful', token });
+    res.status(200).json({ message: 'Login successful', token, 
+
+      user: {
+        _id: user._id,
+        email: user.email,
+        username: user.username,  // If 'name' is used in the User model, change to 'name'
+      },
+     });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
