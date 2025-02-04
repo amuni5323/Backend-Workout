@@ -39,6 +39,7 @@ export const signupUser = async (req, res) => {
     res.status(201).json({ token, user: newUser });
   } catch (err) {
     console.error(err);
+    console.log(err)
     res.status(500).json({ message: 'Server error' });
   }
 };
